@@ -28,10 +28,9 @@ const Page = () => {
         const data = await response.json();
 
         if (data.error === false) {
-          // Save the token in localStorage or cookies
+          // document.cookie = `token=${data.loginResult.token}; path=/`;
           localStorage.setItem("token", data.loginResult.token);
 
-          // Redirect to dashboard
           router.push("/login/dashboard");
         } else {
           alert("Login failed: " + data.message);
@@ -51,13 +50,25 @@ const Page = () => {
   return (
     <main className="h-full w-full">
       <div className="flex w-full">
-        <div className="w-1/3">
+        <div className="relative w-1/3">
           <Image
             src="/images/login.png"
             width={670}
             height={1024}
             alt="Login Side Design"
           />
+          <button
+            type="button"
+            onClick={() => router.push("/")}
+            className="absolute left-5 top-5 flex h-fit w-fit items-center justify-center rounded-full bg-white p-2 hover:bg-gray-100"
+          >
+            <Image
+              src="/icons/arrow-left-black.svg"
+              width={24}
+              height={24}
+              alt=""
+            />
+          </button>
         </div>
 
         {/* Form Login */}
